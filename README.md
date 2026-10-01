@@ -79,7 +79,7 @@ No changes are needed here unless you want to swap the model or point to a diffe
 
 Run main.py once to process the PDF and persist the FAISS index to disk:
 
-    uv run main.py
+    uv run main.py build
 
 Expected output:
 
@@ -97,10 +97,9 @@ or whenever the source PDF changes.
 
 ### Step 2 — Run a query
 
-Open main.py, comment out the run_pipeline() call and uncomment the query(...) call
-with your question, then run:
+Pass your question to the query command:
 
-    uv run main.py
+    uv run main.py query "What are the common baseline rules for feline dental checkups?"
 
 ---
 

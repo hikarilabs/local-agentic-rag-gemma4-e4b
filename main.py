@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 from pathlib import Path
 
@@ -40,5 +41,14 @@ async def query(user_query: str) -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(run_pipeline())
-    # asyncio.run(query("What are the common baseline rules for feline dental checkups?"))
+    parser = argparse.ArgumentParser(description="Local agentic RAG with Gemma")
+    subparsers = parser.add_subparsers(dest="command")
+    subparsers.add_parser("build", help="Build and persist the FAISS index (default)")
+    query_parser = subparsers.add_parser("query", help="Answer a question from the index")
+    query_parser.add_argument("question", help="Natural language question to answer")
+    args = parser.parse_args()
+
+    if args.command == "query":
+        asyncio.run(query(args.question))
+    else:
+        asyncio.run(run_pipeline())
